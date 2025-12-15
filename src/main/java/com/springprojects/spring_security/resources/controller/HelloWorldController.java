@@ -1,4 +1,4 @@
-package com.springprojects.spring_security.resources;
+package com.springprojects.spring_security.resources.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

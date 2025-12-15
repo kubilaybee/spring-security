@@ -1,13 +1,23 @@
-package com.springprojects.spring_security.resources;
+package com.springprojects.spring_security.resources.entity.dto;
 
 public class BasicUserRequestDTO {
 
     private String username;
     private String password;
+    private String role;
 
-    public BasicUserRequestDTO(String username, String password) {
+    public BasicUserRequestDTO(String username, String password, String role) {
         this.username = username;
         this.password = password;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {
