@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         BasicUser basicUser = basicUserService.findUserByUsername(username);
         Collection<GrantedAuthority> authorities = basicUser.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
                 .collect(Collectors.toSet());
         return User.builder()
                 .username(basicUser.getUsername())

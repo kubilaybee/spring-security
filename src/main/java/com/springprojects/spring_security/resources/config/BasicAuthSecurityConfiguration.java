@@ -11,7 +11,9 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -23,7 +25,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
+@Configuration
+@EnableMethodSecurity(jsr250Enabled = true)
 public class BasicAuthSecurityConfiguration {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) {
@@ -36,7 +39,6 @@ public class BasicAuthSecurityConfiguration {
         //http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
-        http.oauth2ResourceServer(oauth2->oauth2.jwt(Customizer.withDefaults()));
         return (SecurityFilterChain) http.build();
     }
 
@@ -79,4 +81,5 @@ public class BasicAuthSecurityConfiguration {
     public JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwkSource){
         return new NimbusJwtEncoder(jwkSource);
     }
+
 }
