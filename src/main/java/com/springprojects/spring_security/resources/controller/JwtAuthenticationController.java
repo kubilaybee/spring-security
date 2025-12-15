@@ -18,7 +18,7 @@ public class JwtAuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public JwtResponse authenticate(Authentication authentication){
+    public JwtResponse authenticate(Authentication authentication) {
         return new JwtResponse(createToken(authentication));
     }
 
@@ -26,9 +26,9 @@ public class JwtAuthenticationController {
         var claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(Instant.now())
-                .expiresAt(Instant.now().plusSeconds(60*15))
+                .expiresAt(Instant.now().plusSeconds(60 * 15))
                 .subject(authentication.getName())
-                .claim("scope",createScope(authentication))
+                .claim("scope", createScope(authentication))
                 .build();
         JwtEncoderParameters parameters = JwtEncoderParameters.from(claims);
         return jwtEncoder.encode(parameters).getTokenValue();
@@ -36,11 +36,12 @@ public class JwtAuthenticationController {
 
     private String createScope(Authentication authentication) {
         return authentication.getAuthorities().stream()
-                .map(a->a.getAuthority())
+                .map(a -> a.getAuthority())
                 .collect(Collectors.joining(" "));
     }
 
 
 }
 
-record JwtResponse(String token){}
+record JwtResponse(String token) {
+}
