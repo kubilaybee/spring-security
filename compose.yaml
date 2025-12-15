@@ -1,0 +1,10 @@
+services:
+  services_bss:
+    container_name: container_bss
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB= database_name
+      - POSTGRES_USER= username
+      - POSTGRES_PASSWORD= password
