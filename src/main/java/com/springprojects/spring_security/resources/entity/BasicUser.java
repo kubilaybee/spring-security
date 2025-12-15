@@ -32,7 +32,7 @@ public class BasicUser {
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_uuid"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            inverseJoinColumns = @JoinColumn(name = "role_uuid")
     )
     private Set<Role> roles;
     private boolean enabled;
